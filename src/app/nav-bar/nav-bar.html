@@ -7,7 +7,7 @@
     <a mat-flat-button color="primary" [routerLink]="['/city']">City</a> |
     <a mat-flat-button color="primary" [routerLink]="['/country']">Country</a>
     <span class="separator"></span>
-    @if(!authService.isLoggedIn()) {
+    @if(!isLoggedIn) {
         <a mat-flat-button color="primary" [routerLink]="['/auth/login']" style="float: right;">Login</a>
     }
     @else {

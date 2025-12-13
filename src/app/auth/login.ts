@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth-service';
 import { LoginRequest } from './login-request';
-
+import { LoginResponse } from './login-response';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
@@ -11,6 +13,7 @@ import { LoginRequest } from './login-request';
 })
 export class Login implements OnInit {
   form!: UntypedFormGroup;
+  router = inject(Router);
 
   constructor (private authService: AuthService) {
     
@@ -32,8 +35,9 @@ export class Login implements OnInit {
     };
 
     this.authService.login(loginrequest).subscribe({  
-      next: (result) => {
-        console.log(result);
+      next: (data: LoginResponse) => {
+        console.log(data);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         console.log(err);
